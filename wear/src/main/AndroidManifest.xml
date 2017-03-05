@@ -1,36 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.panda.lns.rtClassify">
+    package="com.panda.lns.accDataCapture">
 
     <uses-feature android:name="android.hardware.type.watch" />
     <uses-permission android:name="android.permission.BODY_SENSORS" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
 
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/hand"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@android:style/Theme.DeviceDefault">
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <service android:name="com.panda.lns.rtClassify.MessageReceiverService">
+        <service android:name="com.panda.lns.accDataCapture.MessageReceiverService">
             <intent-filter>
-                <action android:name="com.google.android.gms.wearable.BIND_LISTENER" />
+                <action android:name="com.google.android.gms.wearable.MESSAGE_RECEIVED" />
+                <data android:scheme="wear" android:host="*" android:pathPrefix="/start" />
+                <data android:scheme="wear" android:host="*" android:pathPrefix="/stop" />
+                <data android:scheme="wear" android:host="*" android:pathPrefix="/sendFile" />
+                <data android:scheme="wear" android:host="*" android:pathPrefix="/calibrate" />
             </intent-filter>
         </service>
-        <service android:name="com.panda.lns.rtClassify.SensorService" />
-        <activity
-            android:name="com.panda.lns.rtClassify.wearActivity"
-            android:label="@string/app_name" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <service android:name="com.panda.lns.accDataCapture.SensorService"
+            android:exported = "false"
+            android:description="@string/app_name"/>
     </application>
 
 </manifest>

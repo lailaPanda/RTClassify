@@ -6,7 +6,7 @@ android {
     buildToolsVersion "23.0.1"
 
     defaultConfig {
-        applicationId "com.panda.lns.rtClassify"
+        applicationId "com.panda.lns.accDataCapture"
         minSdkVersion 23
         targetSdkVersion 23
         versionCode 1
